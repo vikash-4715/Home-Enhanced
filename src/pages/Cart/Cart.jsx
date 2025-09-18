@@ -1,14 +1,14 @@
 export default function Cart() {
     return(
         <>
-        <section class="breadcrumb">
-            <div class="breadcrumb-container">
+        <section className="breadcrumb">
+            <div className="breadcrumb-container">
             <a href="#">Home</a> &gt;
             <span>Shopping Cart</span>
             </div>
         </section>
 
-        <div class="cart-container">
+        <div className="cart-container">
             <h2>Your Shopping Cart</h2>
             <table>
             <thead>
@@ -27,9 +27,9 @@ export default function Cart() {
                     <span>Stylish Jacket</span>
                 </td>
                 <td>$49.99</td>
-                <td><input type="number" value="1" min="1" class="qty" /></td>
-                <td class="total">$49.99</td>
-                <td><button class="remove-btn">Remove</button></td>
+                <td><input type="number" value="1" min="1" className="qty" /></td>
+                <td className="total">$49.99</td>
+                <td><button className="remove-btn">Remove</button></td>
                 </tr>
                 <tr>
                 <td>
@@ -37,15 +37,15 @@ export default function Cart() {
                     <span>Casual Sneakers</span>
                 </td>
                 <td>$79.99</td>
-                <td><input type="number" value="2" min="1" class="qty" /></td>
-                <td class="total">$159.98</td>
-                <td><button class="remove-btn">Remove</button></td>
+                <td><input type="number" value="2" min="1" className="qty" /></td>
+                <td className="total">$159.98</td>
+                <td><button className="remove-btn">Remove</button></td>
                 </tr>
             </tbody>
             </table>
-            <div class="cart-summary">
+            <div className="cart-summary">
             <p>Subtotal: $209.97</p>
-            <button class="checkout-btn">Proceed to Checkout</button>
+            <button className="checkout-btn">Proceed to Checkout</button>
             </div>
         </div>
         </>
