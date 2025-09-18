@@ -8,7 +8,7 @@ export default function Home() {
         {
             id: 1,
             message: "Great quality products and fast delivery!",
-            name: "John Doe",
+            name: "John  Doe",
         },
         {
             id: 2,
