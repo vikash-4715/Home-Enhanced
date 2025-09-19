@@ -88,11 +88,13 @@ export default function ProductDetails() {
                 <div className="related-products">
                     {relatedProducts && relatedProducts.length > 0 ? (
                         relatedProducts.map((item) => (
-                            <div className="product-card" key={item.id}>
-                                <img src={item.image} alt={item.title} />
-                                <h3>{item.title}</h3>
-                                <span>${item.price}</span>
-                            </div>
+                            <Link to={`/details/${item.id}`}>
+                                <div className="product-card" key={item.id}>
+                                    <img src={item.image} alt={item.title} />
+                                    <h3>{item.title}</h3>
+                                    <span>${item.price}</span>
+                                </div>
+                            </Link>
                         ))
                     ) : (
                         <div className="no-data-card">
