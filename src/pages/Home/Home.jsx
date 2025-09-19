@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import ProductCategory from "../../components/ProductCategory";
 import ProductsCards from "../../components/ProductCards";
 import TrendingProducts from "../../components/TrendingProducts";
@@ -8,7 +7,7 @@ export default function Home() {
         {
             id: 1,
             message: "Great quality products and fast delivery!",
-            name: "John  Doe",
+            name: "John Doe",
         },
         {
             id: 2,

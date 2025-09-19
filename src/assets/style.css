@@ -20,17 +20,17 @@
     .category-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(200px,1fr)); gap:20px; }
     .category-card { background:#fff; border-radius:10px; overflow:hidden; cursor:pointer; transition:transform 0.3s; }
     .category-card:hover { transform:translateY(-5px); }
-    .category-card img { width:100%; height:150px; object-fit:cover; }
+    .category-card img { width:100%; height:150px; object-fit:scale-down; background-color: #dcdcdc; padding: 10px; }
     .category-card h3 { padding:15px; }
 
     /* Products Section */
     .products { padding:50px; display:grid; grid-template-columns:repeat(auto-fit, minmax(250px, 1fr)); gap:30px; }
     .product-card { background:#fff; border-radius:10px; overflow:hidden; box-shadow:0 4px 10px rgba(0,0,0,0.1); transition:transform 0.3s; position:relative; }
     .product-card:hover { transform:translateY(-5px); }
-    .product-card img { width:100%; height:250px; object-fit:cover; }
+    .product-card img { width:100%; height:200px; object-fit:scale-down; background-color: #dcdcdc; padding: 10px; }
     .product-info { padding:15px; }
-    .product-info h3 { margin-bottom:10px; font-size:18px; }
-    .product-info p { margin-bottom:10px; color:#666; font-size:14px; }
+    .product-info h3 { margin-bottom:10px; font-size:18px; line-clamp: 2; text-overflow: ellipsis; display: block; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; }
+    .product-info p { margin-bottom:10px; color:#666; font-size:14px; line-clamp: 2; text-overflow: ellipsis; display: block; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; }
     .product-info span { font-weight:bold; color:#ff4c4c; font-size:16px; }
     .add-cart { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); background:#ff4c4c; color:#fff; border:none; padding:10px 20px; border-radius:5px; opacity:0; cursor:pointer; transition:opacity 0.3s; text-decoration: none; }
     .product-card:hover .add-cart { opacity:1; }

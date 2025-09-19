@@ -1,50 +1,29 @@
-import productPic1 from "../assets/product-1.avif";
-import productPic3 from '../assets/product-3.avif';
-import productPic4 from '../assets/product-4.avif';
-import productPic6 from '../assets/product-6.avif';
-import productPic8 from '../assets/product-8.avif';
-import productPic11 from '../assets/product-11.avif';
-
+import { useEffect, useState } from "react"
 export default function ProductCategory() {
-     const ProductCategory = [
-        {
-            id: 1,
-            image: productPic1,
-            category: "Electronics",
-        },
-        {
-            id: 2,
-            image: productPic3,
-            category: "Photography",
-        },
-        {
-            id: 3,
-            image: productPic4,
-            category: "Apparel",
-        },
-        {
-            id: 4,
-            image: productPic6,
-            category: "Bags",
-        },
-        {
-            id: 5,
-            image: productPic8,
-            category: "Groceries",
-        },
-        {
-            id: 6,
-            image: productPic11,
-            category: "Watches",
-        },
-    ];
+    const [category, setCategory] = useState([]);
+    useEffect(() => {
+        fetch('https://fakestoreapi.com/products')
+        .then(response => response.json())
+        .then(data => {
+            const categoriesOrder = [
+                "men's clothing",
+                "women's clothing",
+                "jewelery",
+                "electronics"
+            ];
+            const filteredProducts = categoriesOrder.map(category =>
+                data.find(item => item.category === category)
+            ).filter(Boolean);
+            setCategory(filteredProducts);
+        })
+    }, []);
     return(
         <>
-            {ProductCategory && ProductCategory.length > 0 ? (
-                ProductCategory.map((product) => (
-                    <div className="category-card" key={product.id}>
-                        <img src={product.image} alt="" />
-                        <h3>{product.category}</h3>
+            {category && category.length > 0 ? (
+                category.map((item) => (
+                    <div className="category-card" key={item.id}>
+                        <img src={item.image} alt="" />
+                        <h3>{item.category}</h3>
                     </div>
                 ))
             ) : (
