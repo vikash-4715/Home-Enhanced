@@ -1,90 +1,104 @@
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useParams, Link } from "react-router-dom";
 
 export default function ProductDetails() {
+    const { id } = useParams();
+    const [product, setProduct] = useState(null);
+    const [relatedProducts, setRelatedProducts] = useState([]);
+    const [testimonial, setTestimonial] = useState(null);
+
+    useEffect(() => {
+        
+        fetch('https://testimonialapi.vercel.app/api')
+            .then(res => res.json())
+            .then(data => { 
+                const shuffled = data.sort(() => 0.5 - Math.random());
+                const selected = shuffled.slice(0, 3);
+                setTestimonial(selected);
+            });
+        fetch(`https://fakestoreapi.com/products/${id}`)
+            .then(res => res.json())
+            .then(data => {
+                setProduct(data);
+
+                fetch('https://fakestoreapi.com/products')
+                    .then(res => res.json())
+                    .then(allProducts => {
+                        const sameCategory = allProducts.filter(
+                            item => item.category === data.category && item.id !== data.id
+                        );
+                        setRelatedProducts(sameCategory);
+                    });
+            });
+    }, [id]);
+    
     return(
         <>
             <section className="breadcrumb">
                 <div className="breadcrumb-container">
                     <Link to="/">Home</Link> &gt;
-                    <Link to="/product">Jackets</Link> &gt;
-                    <span>Stylish Jacket</span>
+                    <Link to="/products">Products</Link> &gt;
+                    <span>{product?.title}</span>
                 </div>
             </section>
 
             <section className="product-detail">
                 <div className="product-images">
-                <img id="main-img" src="https://images.unsplash.com/photo-1612831664821-9b2e3c7d022b?auto=format&fit=crop&w=800&q=80" alt="Stylish Jacket" />
-                <div className="thumbnail-images">
-                    <img src="https://images.unsplash.com/photo-1612831664821-9b2e3c7d022b?auto=format&fit=crop&w=800&q=80" alt="" />
-                    <img src="https://images.unsplash.com/photo-1600185362386-0cf3d6370e87?auto=format&fit=crop&w=800&q=80" alt="" />
-                    <img src="https://images.unsplash.com/photo-1593032465176-44a4b35db7e7?auto=format&fit=crop&w=800&q=80" alt="" />
-                </div>
+                    <img id="main-img" src={product?.image} alt="Stylish Jacket" />
+                    <div className="thumbnail-images">
+                        <img src={product?.image} alt="" />
+                        <img src={product?.image} alt="" />
+                        <img src={product?.image} alt="" />
+                    </div>
                 </div>
                 <div className="product-info">
-                <h1>Stylish Jacket</h1>
-                <p>A trendy, comfortable jacket made with premium materials. Perfect for casual wear and special outings.</p>
-                <div className="price">$49.99</div>
-                <label>Quantity: <input type="number" value="1" min="1"  /></label>
-                <br /><br />
-                <button>Add to Cart</button>
+                    <h1>{product?.title}</h1>
+                    <p>{product?.description}</p>
+                    <div className="price">{product?.price}</div>
+                    <label>Quantity: <input type="number" value="1" min="1"  /></label>
+                    <br /><br />
+                    <button>Add to Cart</button>
                 </div>
             </section>
 
             <section className="reviews">
                 <h2>Customer Reviews</h2>
                 <div className="review-cards">
-                <div className="review-card">
-                    <div className="review-header">
-                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="John Doe" />
-                    <h4>John Doe</h4>
-                    <div className="stars">⭐⭐⭐⭐⭐</div>
-                    </div>
-                    <p>Excellent jacket! Very comfortable and fits perfectly.</p>
-                </div>
-
-                <div className="review-card">
-                    <div className="review-header">
-                    <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Jane Smith" />
-                    <h4>Jane Smith</h4>
-                    <div className="stars">⭐⭐⭐⭐⭐</div>
-                    </div>
-                    <p>Stylish and warm. Loved the color and design.</p>
-                </div>
-
-                <div className="review-card">
-                    <div className="review-header">
-                    <img src="https://randomuser.me/api/portraits/men/56.jpg" alt="Mark Wilson" />
-                    <h4>Mark Wilson</h4>
-                    <div className="stars">⭐⭐⭐⭐</div>
-                    </div>
-                    <p>Good quality for the price. Would recommend!</p>
-                </div>
+                    {testimonial && testimonial.length > 0 ? (
+                        testimonial.map((item) => (
+                            <div className="review-card" key={item.id}>
+                                <div className="review-header">
+                                    <img src={item.avatar} alt={item.name} />
+                                    <h4>{item.name}</h4>
+                                    <div className="stars">{item.rating}</div>
+                                </div>
+                                <p>{item.message}</p>
+                            </div>
+                        ))
+                    ) : (
+                        <div className="no-data-card">
+                            <p>No Testimonial available. Please check back later!</p>
+                        </div>
+                    )}
                 </div>
             </section>
 
             <section className="related">
                 <h2>Related Products</h2>
                 <div className="related-products">
-                <div className="product-card">
-                    <img src="https://images.unsplash.com/photo-1593032465176-44a4b35db7e7?auto=format&fit=crop&w=800&q=80" alt="Casual Sneakers" />
-                    <h3>Casual Sneakers</h3>
-                    <span>$79.99</span>
-                </div>
-                <div className="product-card">
-                    <img src="https://images.unsplash.com/photo-1611078488607-c24b5eb6cdb8?auto=format&fit=crop&w=800&q=80" alt="Elegant Watch" />
-                    <h3>Elegant Watch</h3>
-                    <span>$129.99</span>
-                </div>
-                <div className="product-card">
-                    <img src="https://images.unsplash.com/photo-1600185362386-0cf3d6370e87?auto=format&fit=crop&w=800&q=80" alt="Leather Bag" />
-                    <h3>Leather Bag</h3>
-                    <span>$99.99</span>
-                </div>
-                <div className="product-card">
-                    <img src="https://images.unsplash.com/photo-1612831664821-9b2e3c7d022b?auto=format&fit=crop&w=800&q=80" alt="Stylish Jacket" />
-                    <h3>Stylish Jacket</h3>
-                    <span>$49.99</span>
-                </div>
+                    {relatedProducts && relatedProducts.length > 0 ? (
+                        relatedProducts.map((item) => (
+                            <div className="product-card" key={item.id}>
+                                <img src={item.image} alt={item.title} />
+                                <h3>{item.title}</h3>
+                                <span>${item.price}</span>
+                            </div>
+                        ))
+                    ) : (
+                        <div className="no-data-card">
+                            <p>No Related Products available. Please check back later!</p>
+                        </div>
+                    )}
                 </div>
             </section>
         </>

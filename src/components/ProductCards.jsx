@@ -18,7 +18,7 @@ export default function ProductsCards() {
                             <p>{item.description}</p>
                             <span>${item.price}</span>
                         </div>
-                        <Link to={`/details/${item.id}`} className="add-cart">Add to Cart</Link>
+                        <Link to={`/details/${item.id}`} className="add-cart">View Details</Link>
                     </div>
                 ))
             ) : (

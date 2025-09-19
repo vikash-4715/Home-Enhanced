@@ -119,7 +119,7 @@
     .related h2 { margin-bottom:30px; font-size:28px; text-align:center; }
     .related-products { display:grid; grid-template-columns:repeat(auto-fit, minmax(250px,1fr)); gap:30px; }
     .related-products .product-card { background:#f8f8f8; border-radius:10px; overflow:hidden; text-align:center; padding-bottom:10px; }
-    .related-products .product-card img { width:100%; height:200px; object-fit:cover; }
+    .related-products .product-card img { width:100%; height:200px; object-fit:scale-down; }
     .related-products .product-card h3 { margin:15px 0 5px; }
     .related-products .product-card span { color:#ff4c4c; font-weight:bold; }
 
